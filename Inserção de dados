@@ -1,0 +1,443 @@
+-- ============================================================
+--  BIBLIOTECA SABER LIVRE
+--  Inserção de Dados 
+-- ============================================================
+-- 1. CATEGORIA (50 registros)
+-- ============================================================
+INSERT INTO categoria (nome_categoria, descricao) VALUES
+('Literatura Brasileira',      'Obras de autores nacionais em prosa e verso'),
+('Literatura Estrangeira',     'Obras traduzidas de autores internacionais'),
+('Ciências Exatas',            'Matemática, Física, Química e afins'),
+('Ciências Humanas',           'História, Filosofia, Sociologia e Antropologia'),
+('Ciências Biológicas',        'Biologia, Ecologia, Genética e Medicina'),
+('Tecnologia',                 'Computação, Engenharia e Inovação'),
+('Direito',                    'Legislação, Jurisprudência e Teoria do Direito'),
+('Economia e Administração',   'Gestão, Finanças e Empreendedorismo'),
+('Artes e Cultura',            'Música, Cinema, Teatro e Artes Plásticas'),
+('Infantojuvenil',             'Obras para crianças e jovens leitores'),
+('Poesia',                     'Antologias e coletâneas poéticas nacionais e internacionais'),
+('Romance Histórico',          'Ficção ambientada em períodos históricos reais'),
+('Suspense e Policial',        'Obras de mistério, thriller e investigação'),
+('Ficção Científica',          'Narrativas especulativas sobre ciência e tecnologia'),
+('Fantasia',                   'Mundos imaginários, magia e criaturas fantásticas'),
+('Terror e Horror',            'Obras de medo, tensão psicológica e sobrenatural'),
+('Autoajuda',                  'Desenvolvimento pessoal, motivação e bem-estar'),
+('Biografia e Autobiografia',  'Histórias reais de personalidades marcantes'),
+('Ensaios e Crítica',          'Reflexões intelectuais e análise literária'),
+('Gastronomia',                'Culinária, receitas e cultura gastronômica'),
+('Viagens e Geografia',        'Relatos de viagem, guias e culturas do mundo'),
+('Esportes',                   'Técnica, história e personalidades do esporte'),
+('Religião e Espiritualidade', 'Textos sagrados, teologia e práticas espirituais'),
+('Psicologia',                 'Comportamento humano, psicanálise e saúde mental'),
+('Educação',                   'Pedagogia, didática e teorias de aprendizagem'),
+('Meio Ambiente',              'Ecologia, sustentabilidade e preservação ambiental'),
+('Política',                   'Teoria política, relações internacionais e governança'),
+('Comunicação e Mídia',        'Jornalismo, publicidade e novas mídias'),
+('Arquitetura e Design',       'Projetos, história e teoria do espaço construído'),
+('Matemática Aplicada',        'Estatística, pesquisa operacional e modelagem'),
+('Física',                     'Mecânica, termodinâmica, eletromagnetismo e física moderna'),
+('Química',                    'Química orgânica, inorgânica e físico-química'),
+('Astronomia',                 'Cosmologia, astrofísica e exploração espacial'),
+('Medicina e Saúde',           'Anatomia, fisiologia, clínica e saúde pública'),
+('Enfermagem',                 'Cuidados de saúde, técnicas e ética profissional'),
+('Farmácia',                   'Farmacologia, bioquímica e ciências farmacêuticas'),
+('Odontologia',                'Saúde bucal, técnicas odontológicas e materiais'),
+('Veterinária',                'Saúde e medicina de animais domésticos e silvestres'),
+('Agronomia',                  'Produção vegetal, solos, irrigação e agronegócio'),
+('Engenharia Civil',           'Estruturas, materiais de construção e urbanismo'),
+('Engenharia Elétrica',        'Circuitos, eletrônica, automação e energia'),
+('Engenharia Mecânica',        'Dinâmica, termofluidodinâmica e manufatura'),
+('Arquivologia',               'Gestão de documentos, preservação e memória'),
+('Biblioteconomia',            'Organização do conhecimento e serviços de informação'),
+('Contabilidade',              'Escrituração, análise de balanços e auditoria'),
+('Marketing',                  'Estratégias de mercado, branding e comportamento do consumidor'),
+('Recursos Humanos',           'Gestão de pessoas, liderança e cultura organizacional'),
+('Logística',                  'Cadeia de suprimentos, transporte e distribuição'),
+('Empreendedorismo',           'Startups, inovação e criação de negócios'),
+('Línguas Estrangeiras',       'Gramáticas, dicionários e métodos de idiomas');
+
+-- ============================================================
+-- 2. AUTOR (50 registros)
+-- ============================================================
+INSERT INTO autor (nome, nacionalidade, data_nascimento) VALUES
+('Machado de Assis',            'Brasileira',    '1839-06-21'),
+('Clarice Lispector',           'Brasileira',    '1920-12-10'),
+('Jorge Amado',                 'Brasileira',    '1912-08-10'),
+('Guimarães Rosa',              'Brasileira',    '1908-06-27'),
+('Rachel de Queiroz',           'Brasileira',    '1910-11-17'),
+('Carlos Drummond de Andrade',  'Brasileira',    '1902-10-31'),
+('Fernando Pessoa',             'Portuguesa',    '1888-06-13'),
+('José Saramago',               'Portuguesa',    '1922-11-16'),
+('Gabriel García Márquez',      'Colombiana',    '1927-03-06'),
+('Pablo Neruda',                'Chilena',       '1904-07-12'),
+('George Orwell',               'Britânica',     '1903-06-25'),
+('Franz Kafka',                 'Austro-Húngara','1883-07-03'),
+('Fyodor Dostoevsky',           'Russa',         '1821-11-11'),
+('Leo Tolstoy',                 'Russa',         '1828-09-09'),
+('Victor Hugo',                 'Francesa',      '1802-02-26'),
+('Albert Camus',                'Francesa',      '1913-11-07'),
+('Ernest Hemingway',            'Americana',     '1899-07-21'),
+('William Faulkner',            'Americana',     '1897-09-25'),
+('Mark Twain',                  'Americana',     '1835-11-30'),
+('Edgar Allan Poe',             'Americana',     '1809-01-19'),
+('Agatha Christie',             'Britânica',     '1890-09-15'),
+('Arthur Conan Doyle',          'Britânica',     '1859-05-22'),
+('J.R.R. Tolkien',              'Britânica',     '1892-01-03'),
+('J.K. Rowling',                'Britânica',     '1965-07-31'),
+('Stephen King',                'Americana',     '1947-09-21'),
+('Isaac Asimov',                'Americana',     '1920-01-02'),
+('Philip K. Dick',              'Americana',     '1928-12-16'),
+('Umberto Eco',                 'Italiana',      '1932-01-05'),
+('Italo Calvino',               'Italiana',      '1923-10-15'),
+('Milan Kundera',               'Tcheca',        '1929-04-01'),
+('Haruki Murakami',             'Japonesa',      '1949-01-12'),
+('Yukio Mishima',               'Japonesa',      '1925-01-14'),
+('Chimamanda Ngozi Adichie',    'Nigeriana',     '1977-09-15'),
+('Toni Morrison',               'Americana',     '1931-02-18'),
+('Maya Angelou',                'Americana',     '1928-04-04'),
+('Paulo Coelho',                'Brasileira',    '1947-08-24'),
+('Lygia Fagundes Telles',       'Brasileira',    '1923-04-19'),
+('Rubem Braga',                 'Brasileira',    '1913-01-12'),
+('Rubem Fonseca',               'Brasileira',    '1925-05-11'),
+('Dalton Trevisan',             'Brasileira',    '1925-06-14'),
+('Neil Gaiman',                 'Britânica',     '1960-11-10'),
+('Terry Pratchett',             'Britânica',     '1948-04-28'),
+('Douglas Adams',               'Britânica',     '1952-03-11'),
+('Aldous Huxley',               'Britânica',     '1894-07-26'),
+('H.G. Wells',                  'Britânica',     '1866-09-21'),
+('Jules Verne',                 'Francesa',      '1828-02-08'),
+('Voltaire',                    'Francesa',      '1694-11-21'),
+('Marcel Proust',               'Francesa',      '1871-07-10'),
+('Simone de Beauvoir',          'Francesa',      '1908-01-09'),
+('Jean-Paul Sartre',            'Francesa',      '1905-06-21');
+
+-- ============================================================
+-- 3. FUNCIONARIO (50 registros)
+-- ============================================================
+INSERT INTO funcionario (nome, cpf, email, data_nascimento, cargo, salario, data_admissao, id_supervisor) VALUES
+('Ana Paula Souza',       '11111111101','ana.souza@bib.com',      '1975-03-12','Diretora Geral',         5800.00,'2010-02-01',NULL),
+('Carlos Mendes',         '22222222202','carlos.mendes@bib.com',  '1980-07-22','Gerente de Acervo',      4200.00,'2012-05-10',1),
+('Fernanda Lima',         '33333333303','fernanda.lima@bib.com',  '1985-11-05','Gerente Atendimento',    4200.00,'2013-08-15',1),
+('Roberto Alves',         '44444444404','roberto.alves@bib.com',  '1990-01-30','Bibliotecário',          3500.00,'2015-03-20',2),
+('Juliana Costa',         '55555555505','juliana.costa@bib.com',  '1992-09-14','Bibliotecária',          3500.00,'2016-06-01',2),
+('Marcos Oliveira',       '66666666606','marcos.oli@bib.com',     '1988-04-25','Atendente',              2400.00,'2017-01-10',3),
+('Patricia Rocha',        '77777777707','patricia.r@bib.com',     '1995-12-03','Atendente',              2400.00,'2018-03-05',3),
+('Thiago Santos',         '88888888808','thiago.s@bib.com',       '1993-06-18','Atendente',              2400.00,'2018-07-22',3),
+('Larissa Ferreira',      '99999999909','larissa.f@bib.com',      '1997-02-27','Aux. Administrativo',    2100.00,'2019-09-01',2),
+('Eduardo Martins',       '10101010100','eduardo.m@bib.com',      '1991-08-11','Aux. Administrativo',    2100.00,'2019-11-15',3),
+('Camila Nunes',          '11121314151','camila.n@bib.com',       '1998-05-09','Estagiária',             1200.00,'2023-02-01',4),
+('Rafael Barbosa',        '21314151617','rafael.b@bib.com',       '1999-10-21','Estagiário',             1200.00,'2023-02-01',5),
+('Isabela Dias',          '31415161718','isabela.d@bib.com',      '1996-07-14','Bibliotecária',          3500.00,'2020-04-10',2),
+('Henrique Castro',       '41516171819','henrique.c@bib.com',     '1987-03-30','TI e Sistemas',          3800.00,'2014-10-05',1),
+('Aline Freitas',         '51617181920','aline.f@bib.com',        '1994-01-17','Atendente',              2400.00,'2021-06-14',3),
+('Bruno Carvalho',        '61718192021','bruno.car@bib.com',      '1989-08-05','Bibliotecário',          3500.00,'2016-09-01',2),
+('Tatiana Melo',          '71819202122','tatiana.m@bib.com',      '1993-03-19','Atendente',              2400.00,'2019-04-10',3),
+('Leandro Pires',         '81920212223','leandro.p@bib.com',      '1985-11-30','Aux. Administrativo',    2100.00,'2018-01-15',2),
+('Vanessa Correia',       '91021222324','vanessa.c@bib.com',      '1990-06-22','Bibliotecária',          3500.00,'2017-07-01',2),
+('Diego Monteiro',        '01122232425','diego.mon@bib.com',      '1997-09-14','Estagiário',             1200.00,'2022-03-01',4),
+('Renata Borges',         '01223242526','renata.b@bib.com',       '1991-02-08','Atendente',              2400.00,'2020-10-05',3),
+('Samuel Pinto',          '01324252627','samuel.p@bib.com',       '1986-07-17','Aux. Administrativo',    2100.00,'2015-11-20',3),
+('Juliana Azevedo',       '01425262728','juliana.az@bib.com',     '1994-12-01','Estagiária',             1200.00,'2023-08-01',5),
+('Felipe Gomes',          '01526272829','felipe.g@bib.com',       '1988-04-03','Bibliotecário',          3500.00,'2014-06-15',2),
+('Priscila Lemos',        '01627282930','priscila.l@bib.com',     '1992-10-25','Atendente',              2400.00,'2019-02-01',3),
+('André Vieira',          '01728293031','andre.v@bib.com',        '1983-01-14','Aux. Administrativo',    2100.00,'2013-04-10',2),
+('Luciana Teixeira',      '01829303132','luciana.t@bib.com',      '1996-08-29','Estagiária',             1200.00,'2022-09-01',4),
+('Marcelo Farias',        '01930313233','marcelo.f@bib.com',      '1981-05-07','Bibliotecário',          3600.00,'2011-03-01',2),
+('Cristiane Novaes',      '02031323334','cristiane.n@bib.com',    '1987-09-21','Atendente',              2400.00,'2016-12-01',3),
+('Igor Nascimento',       '02132333435','igor.n@bib.com',         '1995-03-11','Estagiário',             1200.00,'2023-05-01',5),
+('Beatriz Ramos',         '02233343536','beatriz.r@bib.com',      '1990-11-18','Bibliotecária',          3500.00,'2018-08-10',2),
+('Gustavo Henrique',      '02334353637','gustavo.h@bib.com',      '1984-06-30','Aux. Administrativo',    2100.00,'2012-10-20',3),
+('Monique Barreto',       '02435363738','monique.b@bib.com',      '1998-02-05','Estagiária',             1200.00,'2024-01-15',4),
+('Rodrigo Leal',          '02536373839','rodrigo.l@bib.com',      '1986-08-13','Bibliotecário',          3500.00,'2015-05-01',2),
+('Simone Andrade',        '02637383940','simone.a@bib.com',       '1993-04-26','Atendente',              2400.00,'2020-07-01',3),
+('Thales Cunha',          '02738394041','thales.c@bib.com',       '1989-12-09','Aux. Administrativo',    2100.00,'2017-03-15',2),
+('Viviane Campos',        '02839404142','viviane.c@bib.com',      '1991-07-22','Bibliotecária',          3500.00,'2019-09-10',2),
+('Weslley Moura',         '02940414243','weslley.m@bib.com',      '1997-05-04','Estagiário',             1200.00,'2023-11-01',4),
+('Xiomara Lima',          '03041424344','xiomara.l@bib.com',      '1985-10-17','Aux. Administrativo',    2100.00,'2014-07-01',3),
+('Yara Medeiros',         '03142434445','yara.med@bib.com',       '1992-01-30','Atendente',              2400.00,'2021-01-10',3),
+('Zélia Carmo',           '03243444546','zelia.c@bib.com',        '1978-09-08','Bibliotecária Sênior',   3800.00,'2009-06-01',2),
+('Adriana Sousa',         '03344454647','adriana.s@bib.com',      '1986-03-14','Atendente',              2400.00,'2018-04-20',3),
+('Bernardo Lima',         '03445464748','bernardo.l@bib.com',     '1994-06-28','Estagiário',             1200.00,'2022-06-01',4),
+('Cintia Rocha',          '03546474849','cintia.r@bib.com',       '1988-11-05','Aux. Administrativo',    2100.00,'2016-02-01',3),
+('Danilo Pereira',        '03647484950','danilo.p@bib.com',       '1982-08-19','Bibliotecário',          3500.00,'2010-09-01',2),
+('Elisa Fonseca',         '03748495051','elisa.f@bib.com',        '1996-04-07','Estagiária',             1200.00,'2023-03-01',5),
+('Fabio Nunes',           '03849505152','fabio.n@bib.com',        '1979-12-23','Aux. Administrativo',    2100.00,'2008-11-01',2),
+('Giovana Matos',         '03950515253','giovana.m@bib.com',      '1993-07-16','Atendente',              2400.00,'2020-03-15',3),
+('Hudson Ferreira',       '04051525354','hudson.f@bib.com',       '1987-02-01','Bibliotecário',          3500.00,'2013-01-10',2),
+('Ingrid Cavalcante',     '04152535455','ingrid.c@bib.com',       '1995-09-12','Atendente',              2400.00,'2021-08-01',3);
+
+-- ============================================================
+-- 4. LIVRO (50 registros)
+-- ============================================================
+INSERT INTO livro (titulo, isbn, ano_publicacao, editora, quantidade_total, id_categoria) VALUES
+('Dom Casmurro',                           '9788535906783',1899,'Companhia das Letras', 4, 1),
+('Memórias Póstumas de Brás Cubas',        '9788535914849',1881,'Companhia das Letras', 3, 1),
+('A Hora da Estrela',                      '9788532530158',1977,'Rocco',                3, 1),
+('Perto do Coração Selvagem',              '9788532511751',1943,'Rocco',                2, 1),
+('Gabriela Cravo e Canela',                '9788535907346',1958,'Companhia das Letras', 4, 1),
+('Capitães da Areia',                      '9788535907124',1937,'Companhia das Letras', 3, 1),
+('Grande Sertão: Veredas',                 '9788535921021',1956,'Nova Fronteira',       2, 1),
+('O Cortiço',                              '9788508137350',1890,'Ática',                3, 1),
+('Vidas Secas',                            '9788520901025',1938,'Record',               3, 1),
+('O Alquimista',                           '9788575425480',1988,'HarperCollins',        8, 2),
+('Cem Anos de Solidão',                    '9788501012272',1967,'Record',               5, 2),
+('O Amor nos Tempos do Cólera',            '9788501084118',1985,'Record',               3, 2),
+('1984',                                   '9788535922325',1949,'Companhia das Letras', 4, 2),
+('A Revolução dos Bichos',                 '9788535929010',1945,'Companhia das Letras', 5, 2),
+('O Processo',                             '9788535908916',1925,'Companhia das Letras', 3, 2),
+('Crime e Castigo',                        '9788535909265',1866,'Companhia das Letras', 3, 2),
+('Os Miseráveis',                          '9788573260526',1862,'Martin Claret',        3, 2),
+('O Estrangeiro',                          '9788501012326',1942,'Record',               4, 2),
+('O Velho e o Mar',                        '9788535913828',1952,'Companhia das Letras', 3, 2),
+('Admirável Mundo Novo',                   '9788535906806',1932,'Globo',                4, 14),
+('O Senhor dos Anéis',                     '9788533613379',1954,'Martins Fontes',       2, 15),
+('Harry Potter e a Pedra Filosofal',       '9788532511010',1997,'Rocco',                6, 15),
+('It — A Coisa',                           '9788576651925',1986,'Suma',                 3, 16),
+('Fundação',                               '9788576574217',1951,'Aleph',                3, 14),
+('Androides Sonham com Ovelhas Elétricas?','9788576573616',1968,'Aleph',                3, 14),
+('O Nome da Rosa',                         '9788501069788',1980,'Record',               3, 13),
+('A Insustentável Leveza do Ser',          '9788535914252',1984,'Companhia das Letras', 4, 12),
+('Kafka à Beira-Mar',                      '9788535924282',2002,'Companhia das Letras', 3, 2),
+('Amada',                                  '9788501044815',1987,'Record',               2, 2),
+('Eu Sei Por que o Pássaro Canta',         '9788501054029',1969,'Record',               3, 18),
+('Cálculo Volume 1',                       '9788522112586',2010,'Cengage',              5, 3),
+('Álgebra Linear',                         '9788521202073',2016,'LTC',                  4, 3),
+('Física Universitária Vol.1',             '9788588084872',2015,'Pearson',              4, 31),
+('Química Orgânica',                       '9788521612148',2014,'LTC',                  3, 32),
+('Introdução à Programação em Python',     '9788550803937',2019,'Novatec',              6, 6),
+('Sistemas Operacionais Modernos',         '9788576051893',2016,'Pearson',              4, 6),
+('Banco de Dados',                         '9788535285147',2020,'Elsevier',             5, 6),
+('Engenharia de Software',                 '9788535233094',2019,'Pearson',              4, 6),
+('Inteligência Artificial',                '9788535232547',2021,'Elsevier',             3, 6),
+('Direito Constitucional',                 '9788538406150',2022,'Método',               4, 7),
+('Código Civil Comentado',                 '9788553607754',2021,'Manole',               4, 7),
+('Administração Geral e Pública',          '9788597012705',2020,'GEN',                  4, 8),
+('Princípios de Economia',                 '9788522107735',2018,'Cengage',              4, 8),
+('A Origem das Espécies',                  '9788535917642',1859,'Companhia das Letras', 3, 5),
+('Sapiens',                                '9788525432186',2011,'Companhia das Letras', 6, 4),
+('Breve História do Tempo',                '9788580863468',1988,'Intrínseca',           4, 33),
+('O Gene Egoísta',                         '9788535933697',1976,'Companhia das Letras', 3, 5),
+('Pippi Meialonga',                        '9788508167647',1945,'Ática',                5, 10),
+('O Segundo Sexo',                         '9788520930474',1949,'Nova Fronteira',       3, 4),
+('As Flores do Mal',                       '9788572322317',1857,'Martin Claret',        3, 11);
+
+-- ============================================================
+-- 5. LIVRO_AUTOR (50 registros — relação N:N)
+-- ============================================================
+INSERT INTO livro_autor (id_livro, id_autor) VALUES
+(1,  1),  -- Dom Casmurro — Machado de Assis
+(2,  1),  -- Memórias Póstumas — Machado de Assis
+(3,  2),  -- A Hora da Estrela — Clarice Lispector
+(4,  2),  -- Perto do Coração Selvagem — Clarice Lispector
+(5,  3),  -- Gabriela — Jorge Amado
+(6,  3),  -- Capitães da Areia — Jorge Amado
+(7,  4),  -- Grande Sertão — Guimarães Rosa
+(8,  1),  -- O Cortiço — Machado (placeholder Aluísio não cadastrado)
+(9,  5),  -- Vidas Secas — Rachel de Queiroz
+(10, 36), -- O Alquimista — Paulo Coelho
+(11, 9),  -- Cem Anos de Solidão — García Márquez
+(12, 9),  -- O Amor nos Tempos do Cólera — García Márquez
+(13, 11), -- 1984 — George Orwell
+(14, 11), -- A Revolução dos Bichos — George Orwell
+(15, 12), -- O Processo — Franz Kafka
+(16, 13), -- Crime e Castigo — Dostoevsky
+(17, 15), -- Os Miseráveis — Victor Hugo
+(18, 16), -- O Estrangeiro — Albert Camus
+(19, 17), -- O Velho e o Mar — Hemingway
+(20, 44), -- Admirável Mundo Novo — Aldous Huxley
+(21, 23), -- O Senhor dos Anéis — Tolkien
+(22, 24), -- Harry Potter — J.K. Rowling
+(23, 25), -- It — Stephen King
+(24, 26), -- Fundação — Isaac Asimov
+(25, 27), -- Androides Sonham — Philip K. Dick
+(26, 28), -- O Nome da Rosa — Umberto Eco
+(27, 30), -- Insustentável Leveza — Milan Kundera
+(28, 31), -- Kafka à Beira-Mar — Haruki Murakami
+(29, 34), -- Amada — Toni Morrison
+(30, 35), -- Eu Sei Por que o Pássaro Canta — Maya Angelou
+(31, 26), -- Cálculo Vol.1 — Asimov (placeholder)
+(32, 29), -- Álgebra Linear — Italo Calvino (placeholder)
+(33, 26), -- Física Universitária — Asimov (placeholder)
+(34, 28), -- Química Orgânica — Umberto Eco (placeholder)
+(35, 26), -- Python — Asimov (placeholder)
+(36, 26), -- Sistemas Operacionais — Asimov (placeholder)
+(37, 26), -- Banco de Dados — Asimov (placeholder)
+(38, 26), -- Eng. de Software — Asimov (placeholder)
+(39, 26), -- Inteligência Artificial — Asimov (placeholder)
+(40, 26), -- Direito Constitucional — Asimov (placeholder)
+(41, 28), -- Código Civil — Eco (placeholder)
+(42, 29), -- Administração — Calvino (placeholder)
+(43, 30), -- Princípios de Economia — Kundera (placeholder)
+(44, 1),  -- A Origem das Espécies — placeholder
+(45, 4),  -- Sapiens — Guimarães Rosa (placeholder)
+(46, 44), -- Breve História do Tempo — Huxley (placeholder)
+(47, 11), -- O Gene Egoísta — Orwell (placeholder)
+(48, 21), -- Pippi Meialonga — Agatha Christie (placeholder)
+(49, 49), -- O Segundo Sexo — Simone de Beauvoir
+(50, 6);  -- As Flores do Mal — Drummond (placeholder)
+
+-- ============================================================
+-- 6. MEMBRO (50 registros)
+-- ============================================================
+INSERT INTO membro (nome, cpf, email, data_nascimento, end_rua, end_numero, end_complemento, end_cidade, end_cep) VALUES
+('Lucas Andrade',         '00100200301','lucas.a@email.com',      '2000-04-10','Rua das Flores',          '123','Apto 4',    'São Paulo',      '01310100'),
+('Mariana Silva',         '00200300402','mariana.s@email.com',    '1995-08-22','Av. Paulista',            '1000','Sala 5',   'São Paulo',      '01310000'),
+('Pedro Henrique Gomes',  '00300400503','pedro.h@email.com',      '2001-12-05','Rua Augusta',             '500','',          'São Paulo',      '01305000'),
+('Sofia Ramos',           '00400500604','sofia.r@email.com',      '1998-03-17','Rua Oscar Freire',        '200','Ap 12',     'São Paulo',      '01426000'),
+('Gustavo Pereira',       '00500600705','gustavo.p@email.com',    '1990-07-30','Rua da Consolação',       '800','',          'São Paulo',      '01301000'),
+('Isabela Carvalho',      '00600700806','isabela.c@email.com',    '2003-01-14','Rua Haddock Lobo',        '340','Ap 3B',     'São Paulo',      '01414000'),
+('Felipe Souza',          '00700800907','felipe.s@email.com',     '1997-05-28','Av. Rebouças',            '1200','Conj 6',   'São Paulo',      '05402100'),
+('Amanda Oliveira',       '00800901008','amanda.o@email.com',     '2002-09-09','Rua Pamplona',            '76','',           'São Paulo',      '01405100'),
+('Ricardo Neves',         '00901001109','ricardo.n@email.com',    '1985-11-23','Rua Bela Cintra',         '430','Ap 22',     'São Paulo',      '01415000'),
+('Carolina Lima',         '01001101210','carolina.l@email.com',   '1993-06-06','Rua da Liberdade',        '90','Sobrado',    'São Paulo',      '01503000'),
+('Thiago Martins',        '01101201311','thiago.m@email.com',     '1999-02-19','Av. Brigadeiro Faria Lima','2000','Ap 55',  'São Paulo',      '04538133'),
+('Luiza Fernandes',       '01201301412','luiza.f@email.com',      '1988-10-31','Rua Teodoro Sampaio',     '650','',          'São Paulo',      '05406000'),
+('Bruno Costa',           '01301401513','bruno.c@email.com',      '2004-07-07','Rua Pedroso',             '110','Ap 2',      'Campinas',       '13010110'),
+('Natalia Rocha',         '01401501614','natalia.r@email.com',    '1996-04-25','Av. Norte-Sul',           '505','',          'Campinas',       '13020010'),
+('Eduardo Alves',         '01501601715','eduardo.a@email.com',    '2001-08-13','Rua 13 de Maio',          '300','Sala 1',    'Campinas',       '13010030'),
+('Vitória Mendes',        '01601701816','vitoria.m@email.com',    '1994-12-02','Rua Boa Vista',           '77','',           'Santos',         '11010050'),
+('Gabriel Santos',        '01701801917','gabriel.s@email.com',    '2000-03-21','Rua do Comércio',         '215','Ap 9',      'Santos',         '11013050'),
+('Letícia Dias',          '01801902018','leticia.d@email.com',    '1987-09-15','Av. Ana Costa',           '480','Ap 34',     'Santos',         '11060002'),
+('Arthur Barbosa',        '01902002119','arthur.b@email.com',     '2003-06-08','Rua XV de Novembro',      '900','',          'Curitiba',       '80020310'),
+('Camila Castro',         '02002102220','camila.c@email.com',     '1991-01-27','Av. Sete de Setembro',    '1500','Ap 7',     'Curitiba',       '80050370'),
+('Rodrigo Freitas',       '02102202321','rodrigo.f@email.com',    '1999-11-11','Rua das Flores',          '630','Ap 21',     'Curitiba',       '80055270'),
+('Juliana Pinto',         '02202302422','juliana.p@email.com',    '1996-07-04','Rua Marechal Deodoro',    '200','',          'Florianópolis',  '88010020'),
+('Leonardo Ribeiro',      '02302402523','leonardo.r@email.com',   '2002-05-16','Av. Hercílio Luz',        '370','Ap 11',     'Florianópolis',  '88020000'),
+('Fernanda Lopes',        '02402502624','fernanda.lp@email.com',  '1990-03-03','Rua Felipe Schmidt',      '150','Conj 3',    'Florianópolis',  '88010020'),
+('Diego Nascimento',      '02502602725','diego.n@email.com',      '1998-08-19','Av. do Contorno',         '800','Ap 33',     'Belo Horizonte', '30110090'),
+('Priya Mendonça',        '02602702826','priya.m@email.com',      '1993-10-07','Rua Espírito Santo',      '250','',          'Belo Horizonte', '30160030'),
+('Vinicius Teixeira',     '02702802927','vinicius.t@email.com',   '2001-04-30','Av. Afonso Pena',         '1000','Sala 8',   'Belo Horizonte', '30130921'),
+('Beatriz Cardoso',       '02802903028','beatriz.c@email.com',    '1997-02-14','Rua da Bahia',            '600','Ap 15',     'Belo Horizonte', '30160011'),
+('Alexandre Moreira',     '02903003129','alexandre.m@email.com',  '1984-06-22','Av. Dantas Barreto',      '350','',          'Recife',         '50020000'),
+('Isabela Correia',       '03003103230','isabela.cr@email.com',   '1995-09-08','Rua do Imperador',        '120','Ap 5',      'Recife',         '50080010'),
+('Mateus Cardoso',        '03103203331','mateus.c@email.com',     '2000-12-17','Av. Boa Viagem',          '2000','Ap 40',    'Recife',         '51011000'),
+('Laura Medeiros',        '03203303432','laura.m@email.com',      '1992-04-11','Rua Barão de Jaguaripe',  '80','',           'Salvador',       '41950350'),
+('Felipe Rodrigues',      '03303403533','felipe.r@email.com',     '1988-07-29','Av. Oceânica',            '500','Ap 12',     'Salvador',       '40170010'),
+('Aline Matos',           '03403503634','aline.mat@email.com',    '2003-03-23','Rua Chile',               '200','Conj 2',    'Salvador',       '40020500'),
+('Samuel Vieira',         '03503603735','samuel.v@email.com',     '1999-01-05','Av. Dom Luís',            '700','Ap 8',      'Fortaleza',      '60160230'),
+('Eduarda Nogueira',      '03603703836','eduarda.n@email.com',    '1996-08-14','Rua Monsenhor Tabosa',    '300','',          'Fortaleza',      '60175010'),
+('Daniel Cunha',          '03703803937','daniel.c@email.com',     '2002-10-28','Av. Beira Mar',           '1500','Ap 22',    'Fortaleza',      '60060390'),
+('Tatiane Ferreira',      '03803904038','tatiane.f@email.com',    '1991-05-19','Rua dos Andradas',        '400','',          'Porto Alegre',   '90020007'),
+('Victor Amaral',         '03904004139','victor.a@email.com',     '2004-02-07','Av. Independência',       '800','Ap 14',     'Porto Alegre',   '90035072'),
+('Ana Beatriz Duarte',    '04004104240','ana.b@email.com',        '1998-06-30','Rua Padre Chagas',        '150','Ap 3',      'Porto Alegre',   '90570080'),
+('Henrique Lima',         '04104204341','henrique.l@email.com',   '1986-11-15','Av. Sete de Setembro',    '600','',          'Manaus',         '69005141'),
+('Gabriela Monteiro',     '04204304442','gabriela.m@email.com',   '2001-09-03','Rua 10 de Julho',         '250','Ap 7',      'Manaus',         '69010050'),
+('Rafael Cunha',          '04304404543','rafael.cu@email.com',    '1994-03-16','Av. Eduardo Ribeiro',     '400','Sala 3',    'Manaus',         '69010001'),
+('Bianca Sousa',          '04404504644','bianca.s@email.com',     '2000-07-22','Rua Senador Dantas',      '180','Ap 21',     'Rio de Janeiro', '20031000'),
+('Caio Azevedo',          '04504604745','caio.a@email.com',       '1993-04-09','Av. Atlântica',           '3000','Ap 1101',  'Rio de Janeiro', '22070010'),
+('Lara Figueiredo',       '04604704846','lara.f@email.com',       '1989-12-01','Rua do Catete',           '600','Ap 5',      'Rio de Janeiro', '22220000'),
+('Murilo Barros',         '04704804947','murilo.b@email.com',     '2003-08-25','Av. N. Sra. Copacabana',  '800','',          'Rio de Janeiro', '22060010'),
+('Vanessa Gomes',         '04804905048','vanessa.g@email.com',    '1997-01-18','Rua Voluntários da Pátria','350','Ap 9',     'Rio de Janeiro', '22270010'),
+('Yago Pimentel',         '04905005149','yago.p@email.com',       '2002-06-11','Rua Bambina',             '120','',          'Rio de Janeiro', '22251050'),
+('Zara Oliveira',         '05005105250','zara.o@email.com',       '1990-09-27','Av. Rio Branco',          '250','Sala 12',   'Rio de Janeiro', '20040020');
+
+-- ============================================================
+-- 7. MEMBRO_TELEFONE (50 registros)
+-- ============================================================
+INSERT INTO membro_telefone (id_membro, telefone) VALUES
+(1,'11987650001'),(1,'11912340001'),
+(2,'11987650002'),(2,'11900020002'),
+(3,'11987650003'),
+(4,'11987650004'),(4,'11912340004'),
+(5,'11987650005'),
+(6,'11987650006'),(6,'11912340006'),
+(7,'11987650007'),
+(8,'11987650008'),(8,'11912340008'),
+(9,'11987650009'),
+(10,'11987650010'),(10,'11912340010'),
+(11,'11987650011'),
+(12,'11987650012'),(12,'11912340012'),
+(13,'19987650013'),
+(14,'19987650014'),(14,'19912340014'),
+(15,'19987650015'),
+(16,'13987650016'),(16,'13912340016'),
+(17,'13987650017'),
+(18,'13987650018'),(18,'13912340018'),
+(19,'41987650019'),
+(20,'41987650020'),(20,'41912340020'),
+(21,'41987650021'),
+(22,'48987650022'),(22,'48912340022'),
+(23,'48987650023'),
+(24,'48987650024'),(24,'48912340024'),
+(25,'31987650025'),
+(26,'31987650026'),(26,'31912340026'),
+(27,'31987650027'),
+(28,'31987650028'),(28,'31912340028'),
+(29,'81987650029'),
+(30,'81987650030'),(30,'81912340030'),
+(31,'81987650031'),
+(32,'71987650032'),(32,'71912340032'),
+(33,'71987650033'),
+(34,'71987650034'),(34,'71912340034'),
+(35,'85987650035'),
+(36,'85987650036'),(36,'85912340036'),
+(37,'85987650037'),
+(38,'51987650038'),(38,'51912340038'),
+(39,'51987650039'),
+(40,'51987650040'),(40,'51912340040'),
+(41,'92987650041'),
+(42,'92987650042'),(42,'92912340042'),
+(43,'92987650043'),
+(44,'21987650044'),(44,'21912340044'),
+(45,'21987650045'),
+(46,'21987650046'),(46,'21912340046'),
+(47,'21987650047'),
+(48,'21987650048'),(48,'21912340048'),
+(49,'21987650049'),
+(50,'21987650050'),(50,'21912340050');
+
+-- ============================================================
+-- 8. EMPRESTIMO (50 registros)
+-- ============================================================
+INSERT INTO emprestimo (data_emprestimo, data_prev_devolucao, data_devolucao, multa, id_membro, id_livro, id_funcionario) VALUES
+('2024-01-10','2024-01-24','2024-01-22', 0.00,  1,  1,  6),
+('2024-01-12','2024-01-26','2024-01-30', 4.00,  2,  2,  7),
+('2024-01-15','2024-01-29','2024-01-28', 0.00,  3, 13,  8),
+('2024-01-18','2024-02-01','2024-02-05', 4.00,  4, 14,  6),
+('2024-01-20','2024-02-03','2024-02-03', 0.00,  5, 10,  7),
+('2024-02-01','2024-02-15','2024-02-14', 0.00,  6, 22,  8),
+('2024-02-05','2024-02-19','2024-02-25', 6.00,  7, 11,  6),
+('2024-02-08','2024-02-22','2024-02-22', 0.00,  8,  3,  7),
+('2024-02-10','2024-02-24','2024-03-01', 5.00,  9, 45, 15),
+('2024-02-12','2024-02-26','2024-02-26', 0.00, 10, 37,  6),
+('2024-02-14','2024-02-28','2024-03-05', 5.00, 11, 20,  7),
+('2024-02-18','2024-03-03','2024-03-03', 0.00, 12,  5,  8),
+('2024-02-20','2024-03-05','2024-03-10', 5.00, 13, 18, 15),
+('2024-02-22','2024-03-07','2024-03-07', 0.00, 14, 16,  7),
+('2024-02-25','2024-03-10','2024-03-08', 0.00, 15, 36,  8),
+('2024-03-01','2024-03-15','2024-03-18', 3.00, 16, 31,  6),
+('2024-03-03','2024-03-17','2024-03-17', 0.00, 17,  7,  7),
+('2024-03-05','2024-03-19','2024-03-25', 6.00, 18, 44, 15),
+('2024-03-08','2024-03-22','2024-03-22', 0.00, 19, 26,  6),
+('2024-03-10','2024-03-24','2024-03-30', 6.00, 20, 27,  7),
+('2024-03-12','2024-03-26','2024-03-26', 0.00, 21,  1,  8),
+('2024-03-15','2024-03-29','2024-04-02', 4.00, 22, 46, 15),
+('2024-03-18','2024-04-01','2024-04-01', 0.00, 23, 12,  7),
+('2024-03-20','2024-04-03','2024-04-08', 5.00, 24, 17,  8),
+('2024-03-22','2024-04-05','2024-04-05', 0.00, 25,  9,  6),
+('2024-04-01','2024-04-15','2024-04-14', 0.00, 26, 35,  7),
+('2024-04-03','2024-04-17','2024-04-20', 3.00, 27,  4,  8),
+('2024-04-05','2024-04-19','2024-04-19', 0.00, 28, 21, 15),
+('2024-04-08','2024-04-22','2024-04-28', 6.00, 29, 23,  7),
+('2024-04-10','2024-04-24','2024-04-24', 0.00, 30,  6,  8),
+('2024-04-12','2024-04-26','2024-05-01', 5.00, 31, 49,  6),
+('2024-04-15','2024-04-29','2024-04-29', 0.00, 32, 28,  7),
+('2024-04-18','2024-05-02','2024-05-02', 0.00, 33,  8,  8),
+('2024-04-20','2024-05-04','2024-05-10', 6.00, 34, 29, 15),
+('2024-04-22','2024-05-06','2024-05-06', 0.00, 35, 43,  7),
+('2024-05-01','2024-05-15','2024-05-15', 0.00, 36, 33,  8),
+('2024-05-03','2024-05-17','2024-05-22', 5.00, 37, 19,  6),
+('2024-05-05','2024-05-19','2024-05-19', 0.00, 38, 42,  7),
+('2024-05-08','2024-05-22','2024-05-29', 7.00, 39, 24, 15),
+('2024-05-10','2024-05-24','2024-05-24', 0.00, 40, 47,  6),
+('2024-05-12','2024-05-26','2024-06-01', 6.00, 41, 15,  7),
+('2024-05-15','2024-05-29','2024-05-29', 0.00, 42, 30,  8),
+('2024-05-18','2024-06-01','2024-06-01', 0.00, 43, 40, 15),
+('2024-05-20','2024-06-03','2024-06-10', 7.00, 44,  9,  7),
+('2024-05-22','2024-06-05','2024-06-05', 0.00, 45, 25,  8),
+('2024-06-01','2024-06-15', NULL,         0.00, 46, 10,  6),
+('2024-06-03','2024-06-17', NULL,         0.00, 47, 22,  7),
+('2024-06-05','2024-06-19', NULL,         0.00, 48, 11,  8),
+('2024-06-08','2024-06-22', NULL,         0.00, 49, 13, 15),
+('2024-06-10','2024-06-24', NULL,         0.00, 50,  1,  6);
+
