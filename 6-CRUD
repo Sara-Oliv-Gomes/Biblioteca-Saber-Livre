@@ -1,0 +1,161 @@
+-- ============================================================
+--  BIBLIOTECA SABER LIVRE
+--  CRUD — Create, Read, Update, Delete
+
+-- ============================================================
+-- C — CREATE (Inserção)
+-- ============================================================
+
+-- C1. Inserir novo membro
+INSERT INTO membro (nome, cpf, email, data_nascimento, end_rua, end_numero, end_complemento, end_cidade, end_cep)
+VALUES ('João Victor Almeida', '12345678901', 'joao.victor@email.com', '2000-05-15',
+        'Rua das Acácias', '321', 'Ap 10', 'São Paulo', '01310200');
+
+-- C2. Inserir telefone do novo membro
+INSERT INTO membro_telefone (id_membro, telefone)
+VALUES (
+    (SELECT id_membro FROM membro WHERE cpf = '12345678901'),
+    '11999990001'
+);
+
+-- C3. Inserir novo livro
+INSERT INTO livro (titulo, isbn, ano_publicacao, editora, quantidade_total, id_categoria)
+VALUES ('Clean Code', '9780132350884', 2008, 'Prentice Hall', 3, 6);
+
+-- C4. Inserir autor do novo livro
+INSERT INTO autor (nome, nacionalidade, data_nascimento)
+VALUES ('Robert C. Martin', 'Americana', '1952-12-05');
+
+-- C5. Associar autor ao livro (N:N)
+INSERT INTO livro_autor (id_livro, id_autor)
+VALUES (
+    (SELECT id_livro FROM livro WHERE isbn = '9780132350884'),
+    (SELECT id_autor FROM autor WHERE nome = 'Robert C. Martin')
+);
+
+-- C6. Registrar novo empréstimo
+INSERT INTO emprestimo (data_emprestimo, data_prev_devolucao, id_membro, id_livro, id_funcionario)
+VALUES (
+    CURRENT_DATE,
+    CURRENT_DATE + INTERVAL '14 days',
+    (SELECT id_membro FROM membro WHERE cpf = '12345678901'),
+    (SELECT id_livro  FROM livro   WHERE isbn = '9780132350884'),
+    6
+);
+
+-- C7. Inserir nova categoria
+INSERT INTO categoria (nome_categoria, descricao)
+VALUES ('Psicologia', 'Obras sobre comportamento humano, psicanálise e saúde mental');
+
+-- C8. Inserir novo funcionário
+INSERT INTO funcionario (nome, cpf, email, data_nascimento, cargo, salario, data_admissao, id_supervisor)
+VALUES ('Renata Borges', '98765432100', 'renata.b@biblioteca.com', '1990-03-08',
+        'Atendente', 2400.00, CURRENT_DATE, 3);
+
+
+-- ============================================================
+-- R — READ (Consulta)
+-- ============================================================
+
+-- R1. Listar todos os membros cadastrados
+SELECT id_membro, nome, cpf, email, end_cidade
+FROM membro
+ORDER BY nome;
+
+-- R2. Listar todos os livros com sua categoria
+SELECT l.id_livro, l.titulo, l.ano_publicacao, c.nome_categoria
+FROM livro l
+JOIN categoria c ON c.id_categoria = l.id_categoria
+ORDER BY c.nome_categoria, l.titulo;
+
+-- R3. Ver empréstimos em aberto (não devolvidos)
+SELECT e.id_emprestimo, m.nome AS membro, l.titulo AS livro,
+       e.data_emprestimo, e.data_prev_devolucao
+FROM emprestimo e
+JOIN membro m ON m.id_membro = e.id_membro
+JOIN livro  l ON l.id_livro  = e.id_livro
+WHERE e.data_devolucao IS NULL
+ORDER BY e.data_prev_devolucao;
+
+-- R4. Ver disponibilidade dos livros (atributo derivado via view)
+SELECT titulo, quantidade_total, quantidade_disponivel
+FROM vw_livro_disponibilidade
+ORDER BY quantidade_disponivel DESC;
+
+-- R5. Ver histórico de empréstimos de um membro específico
+SELECT e.id_emprestimo, l.titulo, e.data_emprestimo,
+       e.data_devolucao, e.multa
+FROM emprestimo e
+JOIN livro l ON l.id_livro = e.id_livro
+WHERE e.id_membro = 1
+ORDER BY e.data_emprestimo DESC;
+
+
+-- ============================================================
+-- U — UPDATE (Atualização)
+-- ============================================================
+
+-- U1. Registrar devolução de um empréstimo
+UPDATE emprestimo
+SET data_devolucao = CURRENT_DATE,
+    multa = GREATEST(0, (CURRENT_DATE - data_prev_devolucao)) * 1.00
+WHERE id_emprestimo = 51;
+
+-- U2. Atualizar e-mail de um membro
+UPDATE membro
+SET email = 'lucas.andrade.novo@email.com'
+WHERE cpf = '00100200301';
+
+-- U3. Atualizar salário de um funcionário
+UPDATE funcionario
+SET salario = 4500.00
+WHERE id_funcionario = 2;
+
+-- U4. Atualizar quantidade total de exemplares de um livro
+UPDATE livro
+SET quantidade_total = 5
+WHERE isbn = '9780132350884';
+
+-- U5. Corrigir telefone de um membro
+UPDATE membro_telefone
+SET telefone = '11988880001'
+WHERE id_membro = 1 AND telefone = '11987650001';
+
+-- U6. Atualizar cargo de funcionário
+UPDATE funcionario
+SET cargo = 'Bibliotecário Sênior'
+WHERE id_funcionario = 4;
+
+
+-- ============================================================
+-- D — DELETE (Exclusão)
+-- ============================================================
+
+-- D1. Remover telefone avulso de um membro
+DELETE FROM membro_telefone
+WHERE id_membro = 1 AND telefone = '11912340001';
+
+-- D2. Remover empréstimo específico (cancelamento)
+DELETE FROM emprestimo
+WHERE id_emprestimo = 65;
+
+-- D3. Remover associação livro-autor incorreta
+DELETE FROM livro_autor
+WHERE id_livro = 38 AND id_autor = 44;
+
+-- D4. Remover membro cadastrado incorretamente
+-- (só funciona se não tiver empréstimos vinculados)
+DELETE FROM membro
+WHERE cpf = '12345678901'
+  AND NOT EXISTS (
+      SELECT 1 FROM emprestimo e
+      WHERE e.id_membro = membro.id_membro
+  );
+
+-- D5. Remover categoria sem livros vinculados
+DELETE FROM categoria
+WHERE nome_categoria = 'Psicologia'
+  AND NOT EXISTS (
+      SELECT 1 FROM livro l
+      WHERE l.id_categoria = categoria.id_categoria
+  );
