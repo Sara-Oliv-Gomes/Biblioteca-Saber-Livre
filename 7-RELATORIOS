@@ -1,0 +1,213 @@
+-- ============================================================
+--  BIBLIOTECA SABER LIVRE
+--  Relatórios — 10 consultas SQL
+
+-- ============================================================
+-- RELATÓRIO 01
+-- Acervo completo com categoria e autores
+-- Relacionamentos: livro → categoria (1:N) | livro ↔ autor (N:N)
+-- ============================================================
+SELECT
+    l.id_livro,
+    l.titulo,
+    l.ano_publicacao,
+    l.editora,
+    c.nome_categoria,
+    STRING_AGG(a.nome, ', ' ORDER BY a.nome) AS autores
+FROM livro l
+JOIN categoria   c  ON c.id_categoria = l.id_categoria
+JOIN livro_autor la ON la.id_livro    = l.id_livro
+JOIN autor       a  ON a.id_autor     = la.id_autor
+WHERE l.ano_publicacao >= 1900
+GROUP BY l.id_livro, l.titulo, l.ano_publicacao, l.editora, c.nome_categoria
+ORDER BY c.nome_categoria, l.titulo;
+
+
+-- ============================================================
+-- RELATÓRIO 02
+-- Membros com empréstimos em aberto e dias de atraso
+-- Relacionamentos: emprestimo → membro (1:N) | emprestimo → livro (1:N)
+-- ============================================================
+SELECT
+    m.id_membro,
+    m.nome                                             AS membro,
+    m.email,
+    l.titulo                                           AS livro,
+    e.data_emprestimo,
+    e.data_prev_devolucao,
+    GREATEST(0, CURRENT_DATE - e.data_prev_devolucao) AS dias_atraso
+FROM emprestimo e
+JOIN membro m ON m.id_membro = e.id_membro
+JOIN livro  l ON l.id_livro  = e.id_livro
+WHERE e.data_devolucao IS NULL
+ORDER BY dias_atraso DESC, m.nome;
+
+
+-- ============================================================
+-- RELATÓRIO 03
+-- Ranking de livros mais emprestados
+-- Relacionamentos: emprestimo → livro (1:N) | livro → categoria (1:N)
+-- ============================================================
+SELECT
+    l.titulo,
+    c.nome_categoria,
+    COUNT(e.id_emprestimo)  AS total_emprestimos,
+    SUM(e.multa)            AS total_multas_geradas
+FROM livro l
+JOIN categoria  c ON c.id_categoria = l.id_categoria
+JOIN emprestimo e ON e.id_livro     = l.id_livro
+WHERE e.data_emprestimo >= '2024-01-01'
+GROUP BY l.id_livro, l.titulo, c.nome_categoria
+HAVING COUNT(e.id_emprestimo) >= 1
+ORDER BY total_emprestimos DESC, l.titulo;
+
+
+-- ============================================================
+-- RELATÓRIO 04
+-- Membros com maior número de empréstimos e total de multas
+-- Relacionamentos: emprestimo → membro (1:N)
+-- ============================================================
+SELECT
+    m.id_membro,
+    m.nome,
+    m.end_cidade                AS cidade,
+    COUNT(e.id_emprestimo)      AS total_emprestimos,
+    COUNT(CASE WHEN e.data_devolucao IS NULL THEN 1 END) AS em_aberto,
+    COALESCE(SUM(e.multa), 0)   AS total_multas
+FROM membro m
+JOIN emprestimo e ON e.id_membro = m.id_membro
+WHERE e.data_emprestimo >= '2024-01-01'
+GROUP BY m.id_membro, m.nome, m.end_cidade
+HAVING COUNT(e.id_emprestimo) >= 1
+ORDER BY total_emprestimos DESC, total_multas DESC;
+
+
+-- ============================================================
+-- RELATÓRIO 05
+-- Funcionários e empréstimos que registraram, com supervisor
+-- Relacionamentos: emprestimo → funcionario (1:N) | funcionario → funcionario (1:1)
+-- ============================================================
+SELECT
+    f.id_funcionario,
+    f.nome                          AS funcionario,
+    f.cargo,
+    s.nome                          AS supervisor,
+    COUNT(e.id_emprestimo)          AS emprestimos_registrados,
+    COALESCE(SUM(e.multa), 0)       AS multas_geradas
+FROM funcionario f
+LEFT JOIN funcionario s ON s.id_funcionario = f.id_supervisor
+LEFT JOIN emprestimo  e ON e.id_funcionario = f.id_funcionario
+WHERE f.cargo NOT IN ('Diretora Geral','Gerente de Acervo','Gerente Atendimento')
+GROUP BY f.id_funcionario, f.nome, f.cargo, s.nome
+ORDER BY emprestimos_registrados DESC;
+
+
+-- ============================================================
+-- RELATÓRIO 06
+-- Disponibilidade do acervo por categoria
+-- Relacionamentos: livro → categoria (1:N) + view derivada
+-- ============================================================
+SELECT
+    c.nome_categoria,
+    COUNT(l.id_livro)              AS total_titulos,
+    SUM(l.quantidade_total)        AS total_exemplares,
+    SUM(vd.quantidade_disponivel)  AS exemplares_disponiveis,
+    SUM(l.quantidade_total)
+      - SUM(vd.quantidade_disponivel) AS exemplares_emprestados
+FROM categoria c
+JOIN livro l
+    ON l.id_categoria = c.id_categoria
+JOIN vw_livro_disponibilidade vd
+    ON vd.id_livro = l.id_livro
+WHERE c.nome_categoria IS NOT NULL
+GROUP BY c.id_categoria, c.nome_categoria
+ORDER BY exemplares_emprestados DESC, c.nome_categoria;
+
+
+-- ============================================================
+-- RELATÓRIO 07
+-- Histórico completo de empréstimos com dias de atraso e multa
+-- Relacionamentos: emprestimo → membro, livro, funcionario
+-- ============================================================
+SELECT
+    e.id_emprestimo,
+    m.nome                                              AS membro,
+    l.titulo                                            AS livro,
+    f.nome                                              AS atendente,
+    e.data_emprestimo,
+    e.data_prev_devolucao,
+    e.data_devolucao,
+    GREATEST(0, COALESCE(e.data_devolucao, CURRENT_DATE)
+               - e.data_prev_devolucao)                 AS dias_atraso,
+    e.multa
+FROM emprestimo e
+JOIN membro      m ON m.id_membro      = e.id_membro
+JOIN livro       l ON l.id_livro       = e.id_livro
+JOIN funcionario f ON f.id_funcionario = e.id_funcionario
+WHERE e.multa > 0
+ORDER BY e.multa DESC, e.data_emprestimo DESC;
+
+
+-- ============================================================
+-- RELATÓRIO 08
+-- Autores com mais títulos no acervo
+-- Relacionamentos: livro ↔ autor (N:N) | livro → categoria (1:N)
+-- ============================================================
+SELECT
+    a.id_autor,
+    a.nome                          AS autor,
+    a.nacionalidade,
+    COUNT(DISTINCT la.id_livro)     AS total_livros,
+    STRING_AGG(DISTINCT c.nome_categoria, ', '
+               ORDER BY c.nome_categoria) AS categorias
+FROM autor a
+JOIN livro_autor la ON la.id_autor    = a.id_autor
+JOIN livro      l  ON l.id_livro      = la.id_livro
+JOIN categoria  c  ON c.id_categoria  = l.id_categoria
+WHERE a.nacionalidade IS NOT NULL
+GROUP BY a.id_autor, a.nome, a.nacionalidade
+HAVING COUNT(DISTINCT la.id_livro) >= 2
+ORDER BY total_livros DESC, a.nome;
+
+
+-- ============================================================
+-- RELATÓRIO 09
+-- Membros com telefones cadastrados (atributo multivalorado)
+-- Relacionamentos: membro → membro_telefone (1:N)
+-- ============================================================
+SELECT
+    m.id_membro,
+    m.nome,
+    m.end_cidade                                AS cidade,
+    COUNT(mt.id)                                AS qtd_telefones,
+    STRING_AGG(mt.telefone, ' | '
+               ORDER BY mt.id)                  AS telefones
+FROM membro m
+JOIN membro_telefone mt ON mt.id_membro = m.id_membro
+WHERE m.end_cidade IS NOT NULL
+GROUP BY m.id_membro, m.nome, m.end_cidade
+ORDER BY qtd_telefones DESC, m.nome;
+
+
+-- ============================================================
+-- RELATÓRIO 10
+-- Resumo mensal de empréstimos e arrecadação de multas
+-- Relacionamentos: emprestimo → membro | emprestimo → livro
+-- ============================================================
+SELECT
+    TO_CHAR(e.data_emprestimo, 'YYYY-MM')       AS mes,
+    COUNT(e.id_emprestimo)                      AS total_emprestimos,
+    COUNT(CASE WHEN e.data_devolucao IS NOT NULL
+               THEN 1 END)                      AS devolvidos,
+    COUNT(CASE WHEN e.data_devolucao IS NULL
+               THEN 1 END)                      AS em_aberto,
+    COUNT(CASE WHEN e.multa > 0
+               THEN 1 END)                      AS com_multa,
+    COALESCE(SUM(e.multa), 0)                   AS total_arrecadado,
+    COUNT(DISTINCT e.id_membro)                 AS membros_ativos
+FROM emprestimo e
+JOIN membro m ON m.id_membro = e.id_membro
+JOIN livro  l ON l.id_livro  = e.id_livro
+WHERE e.data_emprestimo BETWEEN '2024-01-01' AND '2024-12-31'
+GROUP BY TO_CHAR(e.data_emprestimo, 'YYYY-MM')
+ORDER BY mes;
