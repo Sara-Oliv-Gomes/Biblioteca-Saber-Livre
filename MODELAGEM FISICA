@@ -1,3 +1,4 @@
+
 CREATE SCHEMA Biblioteca_Saber_livre;
 
 CREATE TABLE categoria (
