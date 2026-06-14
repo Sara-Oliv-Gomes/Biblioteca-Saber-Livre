@@ -1,0 +1,91 @@
+CREATE SCHEMA Biblioteca_Saber_livre;
+
+CREATE TABLE categoria (
+    id_categoria   SERIAL       PRIMARY KEY,
+    nome_categoria VARCHAR(80)  NOT NULL UNIQUE,
+    descricao      TEXT
+);
+CREATE TABLE autor (
+    id_autor        SERIAL       PRIMARY KEY,
+    nome            VARCHAR(120) NOT NULL,
+    nacionalidade   VARCHAR(60),
+    data_nascimento DATE
+);
+CREATE TABLE funcionario (
+    id_funcionario  SERIAL        PRIMARY KEY,
+    nome            VARCHAR(120)  NOT NULL,
+    cpf             CHAR(11)      NOT NULL UNIQUE,
+    email           VARCHAR(120)  UNIQUE,
+    data_nascimento DATE,
+    cargo           VARCHAR(60)   NOT NULL,
+    salario         NUMERIC(10,2),
+    data_admissao   DATE          NOT NULL,
+    id_supervisor   INT           REFERENCES funcionario(id_funcionario)
+);
+CREATE TABLE livro (
+    id_livro          SERIAL        PRIMARY KEY,
+    titulo            VARCHAR(200)  NOT NULL,
+    isbn              VARCHAR(20)   UNIQUE,
+    ano_publicacao    SMALLINT,
+    editora           VARCHAR(100),
+    quantidade_total  SMALLINT      NOT NULL DEFAULT 1,
+    id_categoria      INT           REFERENCES categoria(id_categoria)
+);
+CREATE TABLE livro_autor (
+    id_livro  INT NOT NULL REFERENCES livro(id_livro)  ON DELETE CASCADE,
+    id_autor  INT NOT NULL REFERENCES autor(id_autor)  ON DELETE CASCADE,
+    PRIMARY KEY (id_livro, id_autor)
+);
+CREATE TABLE membro (
+    id_membro       SERIAL        PRIMARY KEY,
+    nome            VARCHAR(120)  NOT NULL,
+    cpf             CHAR(11)      NOT NULL UNIQUE,
+    email           VARCHAR(120)  UNIQUE,
+    data_nascimento DATE,
+    -- atributo composto: endereco
+    end_rua         VARCHAR(150),
+    end_numero      VARCHAR(10),
+    end_complemento VARCHAR(60),
+    end_cidade      VARCHAR(80),
+    end_cep         CHAR(8)
+);
+CREATE TABLE membro_telefone (
+    id        SERIAL      PRIMARY KEY,
+    id_membro INT         NOT NULL REFERENCES membro(id_membro) ON DELETE CASCADE,
+    telefone  VARCHAR(20) NOT NULL
+);
+CREATE TABLE emprestimo (
+    id_emprestimo       SERIAL       PRIMARY KEY,
+    data_emprestimo     DATE         NOT NULL DEFAULT CURRENT_DATE,
+    data_prev_devolucao DATE         NOT NULL,
+    data_devolucao      DATE,        -- NULL = empréstimo em aberto
+    multa               NUMERIC(8,2) DEFAULT 0,
+    id_membro           INT          NOT NULL REFERENCES membro(id_membro),
+    id_livro            INT          NOT NULL REFERENCES livro(id_livro),
+    id_funcionario      INT          NOT NULL REFERENCES funcionario(id_funcionario)
+);
+-- Derivado: quantidade_disponivel
+CREATE OR REPLACE VIEW vw_livro_disponibilidade AS
+SELECT
+    l.id_livro,
+    l.titulo,
+    l.quantidade_total,
+    l.quantidade_total
+        - COUNT(e.id_emprestimo)
+          FILTER (WHERE e.data_devolucao IS NULL)
+        AS quantidade_disponivel
+FROM livro l
+LEFT JOIN emprestimo e ON e.id_livro = l.id_livro
+GROUP BY l.id_livro, l.titulo, l.quantidade_total;
+
+-- Derivado: dias_atraso
+CREATE OR REPLACE VIEW vw_emprestimo_atraso AS
+SELECT
+    e.*,
+    CASE
+        WHEN e.data_devolucao IS NOT NULL
+            THEN GREATEST(0, e.data_devolucao - e.data_prev_devolucao)
+        ELSE
+            GREATEST(0, CURRENT_DATE - e.data_prev_devolucao)
+    END AS dias_atraso
+FROM emprestimo e;
